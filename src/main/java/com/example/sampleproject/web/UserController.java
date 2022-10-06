@@ -9,12 +9,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/auth")
 public class UserController {
 
-    private final ModelMapper mapper;
     private final UserService userService;
 
 
-    public UserController(ModelMapper mapper, UserService userService) {
-        this.mapper = mapper;
+    public UserController(UserService userService) {
         this.userService = userService;
     }
 

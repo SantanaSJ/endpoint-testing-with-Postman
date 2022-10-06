@@ -1,17 +1,20 @@
 package com.example.sampleproject.model.entities;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name = "vinyls")
+@Table(name = "albums")
 public class AlbumEntity extends BaseEntity {
 
     @ManyToOne
+    @JsonManagedReference
     private ArtistEntity artist;
 
     @Column
-    private String album;
+    private String albumName;
 
     @Column(columnDefinition = "TEXT")
     private String description;
@@ -20,12 +23,12 @@ public class AlbumEntity extends BaseEntity {
     private List<UserEntity> users;
 
 
-    public String getAlbum() {
-        return album;
+    public String getAlbumName() {
+        return albumName;
     }
 
-    public AlbumEntity setAlbum(String album) {
-        this.album = album;
+    public AlbumEntity setAlbumName(String album) {
+        this.albumName = album;
         return this;
     }
 

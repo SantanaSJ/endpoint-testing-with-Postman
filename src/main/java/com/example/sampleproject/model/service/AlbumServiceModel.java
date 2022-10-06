@@ -4,7 +4,7 @@ package com.example.sampleproject.model.service;
 public class AlbumServiceModel {
 
     private String artist;
-    private String album;
+    private String albumName;
     private String description;
 
 
@@ -17,12 +17,12 @@ public class AlbumServiceModel {
         return this;
     }
 
-    public String getAlbum() {
-        return album;
+    public String getAlbumName() {
+        return albumName;
     }
 
-    public AlbumServiceModel setAlbum(String album) {
-        this.album = album;
+    public AlbumServiceModel setAlbumName(String albumName) {
+        this.albumName = albumName;
         return this;
     }
 

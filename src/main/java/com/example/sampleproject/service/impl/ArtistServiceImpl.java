@@ -2,6 +2,7 @@ package com.example.sampleproject.service.impl;
 
 import com.example.sampleproject.exception.ArtistNotFoundException;
 import com.example.sampleproject.model.binding.ArtistAddBindingModel;
+import com.example.sampleproject.model.binding.UpdateArtistBindingModel;
 import com.example.sampleproject.model.entities.AlbumEntity;
 import com.example.sampleproject.model.entities.ArtistEntity;
 import com.example.sampleproject.model.service.ArtistServiceModel;
@@ -35,7 +36,7 @@ public class ArtistServiceImpl implements ArtistService {
                 .map(a -> {
                     ArtistServiceModel map = this.mapper.map(a, ArtistServiceModel.class);
                     List<AlbumServiceModel> vinylServiceModels = this.albumService.findByArtist(a.getName());
-                    map.setVinylServiceModels(vinylServiceModels);
+                    map.setAlbumServiceModels(vinylServiceModels);
                     return map;
                 })
                 .collect(Collectors.toList());
@@ -49,7 +50,7 @@ public class ArtistServiceImpl implements ArtistService {
                 .map(a -> {
                     ArtistServiceModel serviceModel = this.mapper.map(a, ArtistServiceModel.class);
                     List<AlbumServiceModel> serviceModels = this.albumService.findByArtistId(id);
-                    serviceModel.setVinylServiceModels(serviceModels);
+                    serviceModel.setAlbumServiceModels(serviceModels);
                     return serviceModel;
                 })
                 .orElseThrow(() -> new ArtistNotFoundException("Artist Entity with id " + id + " was not found!"));
@@ -64,7 +65,7 @@ public class ArtistServiceImpl implements ArtistService {
                 .map(a -> {
                     ArtistServiceModel serviceModel = this.mapper.map(a, ArtistServiceModel.class);
                     List<AlbumServiceModel> serviceModels = this.albumService.findByArtist(a.getName());
-                    serviceModel.setVinylServiceModels(serviceModels);
+                    serviceModel.setAlbumServiceModels(serviceModels);
                     return serviceModel;
                 })
                 .orElseThrow(() -> new ArtistNotFoundException("Artist Entity with name " + name + " was not found!"));
@@ -73,7 +74,7 @@ public class ArtistServiceImpl implements ArtistService {
 
     @Override
     public boolean existsByName(String name) {
-       return this.artistRepository.existsByName(name);
+        return this.artistRepository.existsByName(name);
     }
 
     @Override
@@ -96,4 +97,24 @@ public class ArtistServiceImpl implements ArtistService {
         return saved;
     }
 
+    @Override
+    public ArtistEntity updateArtist(UpdateArtistBindingModel updateModel) {
+
+        ArtistEntity artist = this.artistRepository
+                .findById(updateModel.getId())
+                .orElseThrow(() -> new ArtistNotFoundException("Artist Entity with id " + updateModel.getId() + " was not found!"));
+
+        artist
+                .setName(updateModel.getName())
+                .setDescription(updateModel.getDescription());
+
+        if (updateModel.getAlbums() != null) {
+            artist.setAlbumEntity(updateModel.getAlbums()
+                    .stream()
+                    .map(a -> this.mapper.map(a, AlbumEntity.class))
+                    .collect(Collectors.toList()));
+        }
+
+        return this.artistRepository.save(artist);
+    }
 }

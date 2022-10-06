@@ -9,8 +9,8 @@ public class ArtistServiceModel {
     private String name;
     private String description;
 
-    @Name("vinyls")
-    private List<AlbumServiceModel> vinylServiceModels;
+    @Name("albums")
+    private List<AlbumServiceModel> albumServiceModels;
 
     public String getName() {
         return name;
@@ -30,12 +30,12 @@ public class ArtistServiceModel {
         return this;
     }
 
-    public List<AlbumServiceModel> getVinylServiceModels() {
-        return vinylServiceModels;
+    public List<AlbumServiceModel> getAlbumServiceModels() {
+        return albumServiceModels;
     }
 
-    public ArtistServiceModel setVinylServiceModels(List<AlbumServiceModel> vinylServiceModels) {
-        this.vinylServiceModels = vinylServiceModels;
+    public ArtistServiceModel setAlbumServiceModels(List<AlbumServiceModel> albumServiceModels) {
+        this.albumServiceModels = albumServiceModels;
         return this;
     }
 }

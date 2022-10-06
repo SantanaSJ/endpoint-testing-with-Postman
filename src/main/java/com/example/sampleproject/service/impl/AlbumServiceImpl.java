@@ -1,9 +1,13 @@
 package com.example.sampleproject.service.impl;
 
+import com.example.sampleproject.exception.ArtistNotFoundException;
 import com.example.sampleproject.exception.VinylNotFoundException;
+import com.example.sampleproject.model.binding.AlbumAddBindingModel;
 import com.example.sampleproject.model.entities.AlbumEntity;
+import com.example.sampleproject.model.entities.ArtistEntity;
 import com.example.sampleproject.model.service.AlbumServiceModel;
-import com.example.sampleproject.repository.VinylRepository;
+import com.example.sampleproject.repository.AlbumRepository;
+import com.example.sampleproject.repository.ArtistRepository;
 import com.example.sampleproject.service.AlbumService;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -12,19 +16,21 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class VinylServiceImpl implements AlbumService {
-    private final VinylRepository vinylRepository;
+public class AlbumServiceImpl implements AlbumService {
+    private final AlbumRepository albumRepository;
     private final ModelMapper mapper;
+    private final ArtistRepository artistRepository;
 
-    public VinylServiceImpl(VinylRepository vinylRepository, ModelMapper mapper) {
-        this.vinylRepository = vinylRepository;
+    public AlbumServiceImpl(AlbumRepository vinylRepository, ModelMapper mapper, ArtistRepository artistRepository) {
+        this.albumRepository = vinylRepository;
         this.mapper = mapper;
+        this.artistRepository = artistRepository;
     }
 
 
     @Override
     public List<AlbumServiceModel> findAllVinyls() {
-        List<AlbumEntity> allVinyls = this.vinylRepository.getAllVinyls();
+        List<AlbumEntity> allVinyls = this.albumRepository.getAllVinyls();
         List<AlbumServiceModel> collect = allVinyls
                 .stream()
                 .map(a -> {
@@ -37,7 +43,7 @@ public class VinylServiceImpl implements AlbumService {
 
     @Override
     public List<AlbumServiceModel> findByArtist(String name) {
-        List<AlbumEntity> vinylEntities = this.vinylRepository.findByArtist(name);
+        List<AlbumEntity> vinylEntities = this.albumRepository.findByArtist(name);
         return getVinylServiceModels(vinylEntities);
 
 
@@ -45,13 +51,13 @@ public class VinylServiceImpl implements AlbumService {
 
     @Override
     public List<AlbumServiceModel> findByArtistId(Long id) {
-        List<AlbumEntity> entities = this.vinylRepository.findByArtistId(id);
+        List<AlbumEntity> entities = this.albumRepository.findByArtistId(id);
         return getVinylServiceModels(entities);
     }
 
     @Override
     public AlbumServiceModel finById(Long id) {
-        AlbumServiceModel vinylServiceModel = this.vinylRepository.findById(id)
+        AlbumServiceModel vinylServiceModel = this.albumRepository.findById(id)
                 .map(v -> {
                     AlbumServiceModel map = this.mapper.map(v, AlbumServiceModel.class);
                     map.setArtist(v.getArtist().getName());
@@ -63,13 +69,31 @@ public class VinylServiceImpl implements AlbumService {
 
     @Override
     public AlbumServiceModel findByAlbum(String album) {
-        AlbumEntity albumEntity = this.vinylRepository
-                .findByAlbum(album)
+        AlbumEntity albumEntity = this.albumRepository
+                .findByAlbumName(album)
                 .orElseThrow(() -> new VinylNotFoundException("Vinyl with name " + album + " was not found!"));
 
         AlbumServiceModel serviceModel = this.mapper.map(albumEntity, AlbumServiceModel.class);
         serviceModel.setArtist(albumEntity.getArtist().getName());
         return serviceModel;
+    }
+
+    @Override
+    public boolean existsByName(String name) {
+        if (this.albumRepository.existsByAlbumName(name)) {
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public AlbumEntity addAlbum(AlbumAddBindingModel addBindingModel) {
+        ArtistEntity artist = this.artistRepository
+                .findByName(addBindingModel.getArtist())
+                .orElseThrow(() -> new ArtistNotFoundException("Artist was not found!"));
+        AlbumEntity albumEntity = this.mapper.map(addBindingModel, AlbumEntity.class);
+        albumEntity.setArtist(artist);
+      return this.albumRepository.save(albumEntity);
     }
 
     private List<AlbumServiceModel> getVinylServiceModels(List<AlbumEntity> entities) {

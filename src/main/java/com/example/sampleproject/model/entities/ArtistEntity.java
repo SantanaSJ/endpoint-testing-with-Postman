@@ -1,5 +1,8 @@
 package com.example.sampleproject.model.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -13,6 +16,7 @@ public class ArtistEntity extends BaseEntity {
     private String description;
 
     @OneToMany(mappedBy = "artist", cascade = CascadeType.ALL)
+    @JsonBackReference
     private List<AlbumEntity> albumEntity;
 
     public List<AlbumEntity> getAlbumEntity() {
@@ -41,4 +45,6 @@ public class ArtistEntity extends BaseEntity {
         this.description = description;
         return this;
     }
+
+
 }
