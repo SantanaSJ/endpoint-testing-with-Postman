@@ -1,6 +1,7 @@
 package com.example.sampleproject.service;
 
 import com.example.sampleproject.model.binding.AlbumAddBindingModel;
+import com.example.sampleproject.model.binding.UpdateAlbumBindingModel;
 import com.example.sampleproject.model.entities.AlbumEntity;
 import com.example.sampleproject.model.service.AlbumServiceModel;
 
@@ -20,5 +21,7 @@ public interface AlbumService {
     boolean existsByName(String name);
 
     AlbumEntity addAlbum(AlbumAddBindingModel addBindingModel);
+
+    AlbumServiceModel updateAlbum(UpdateAlbumBindingModel bindingModel);
 }
 

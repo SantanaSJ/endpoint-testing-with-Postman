@@ -114,7 +114,6 @@ public class ArtistServiceImpl implements ArtistService {
                     .map(a -> this.mapper.map(a, AlbumEntity.class))
                     .collect(Collectors.toList()));
         }
-
         return this.artistRepository.save(artist);
     }
 }

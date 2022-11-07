@@ -2,6 +2,7 @@ package com.example.sampleproject.web;
 
 import com.example.sampleproject.model.binding.AlbumAddBindingModel;
 import com.example.sampleproject.model.binding.ArtistAddBindingModel;
+import com.example.sampleproject.model.binding.UpdateAlbumBindingModel;
 import com.example.sampleproject.model.entities.AlbumEntity;
 import com.example.sampleproject.model.entities.ArtistEntity;
 import com.example.sampleproject.model.response.ResponseMessage;
@@ -62,6 +63,20 @@ public class AlbumController {
                 .buildAndExpand(albumEntity.getId())
                 .toUri();
         return ResponseEntity.created(location).build();
+    }
+
+    @PatchMapping("/update/{id}")
+    public ResponseEntity<?> updateAlbum(@RequestBody UpdateAlbumBindingModel bindingModel, BindingResult br,
+                                         @PathVariable("id") Long id) {
+
+        if (br.hasErrors()) {
+            ResponseEntity.badRequest().body(new ResponseMessage("Invalid data!"));
+        }
+
+        AlbumServiceModel albumServiceModel = this.albumService.updateAlbum(bindingModel);
+
+        return ResponseEntity.ok().body(albumServiceModel);
+
     }
 
 }

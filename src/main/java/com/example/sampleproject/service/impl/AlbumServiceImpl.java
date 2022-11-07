@@ -1,8 +1,10 @@
 package com.example.sampleproject.service.impl;
 
+import com.example.sampleproject.exception.AlbumNotFoundException;
 import com.example.sampleproject.exception.ArtistNotFoundException;
 import com.example.sampleproject.exception.VinylNotFoundException;
 import com.example.sampleproject.model.binding.AlbumAddBindingModel;
+import com.example.sampleproject.model.binding.UpdateAlbumBindingModel;
 import com.example.sampleproject.model.entities.AlbumEntity;
 import com.example.sampleproject.model.entities.ArtistEntity;
 import com.example.sampleproject.model.service.AlbumServiceModel;
@@ -35,7 +37,7 @@ public class AlbumServiceImpl implements AlbumService {
                 .stream()
                 .map(a -> {
                     AlbumServiceModel map = this.mapper.map(a, AlbumServiceModel.class);
-                     return map.setArtist(a.getArtist().getName());
+                    return map.setArtist(a.getArtist().getName());
                 })
                 .collect(Collectors.toList());
         return collect;
@@ -93,7 +95,27 @@ public class AlbumServiceImpl implements AlbumService {
                 .orElseThrow(() -> new ArtistNotFoundException("Artist was not found!"));
         AlbumEntity albumEntity = this.mapper.map(addBindingModel, AlbumEntity.class);
         albumEntity.setArtist(artist);
-      return this.albumRepository.save(albumEntity);
+        return this.albumRepository.save(albumEntity);
+    }
+
+    @Override
+    public AlbumServiceModel updateAlbum(UpdateAlbumBindingModel bindingModel) {
+
+        AlbumEntity albumEntity = this.albumRepository
+                .findById(bindingModel.getId())
+                .orElseThrow(() -> new AlbumNotFoundException("Album Entity with id " + bindingModel.getId() + " was not found!"));
+
+        albumEntity
+                .setDescription(bindingModel.getDescription());
+        if (bindingModel.getAlbumName() != null) {
+            albumEntity.setAlbumName(bindingModel.getAlbumName());
+        }
+        this.albumRepository.save(albumEntity);
+        AlbumServiceModel albumServiceModel = this.mapper.map(albumEntity, AlbumServiceModel.class);
+        albumServiceModel.setArtist(albumEntity.getArtist().getName());
+
+
+        return albumServiceModel;
     }
 
     private List<AlbumServiceModel> getVinylServiceModels(List<AlbumEntity> entities) {
