@@ -39,3 +39,20 @@ Content-Type: application/json
 RESPONSE: HTTP 201 (Created)
 Location header: http://localhost:8080/artist/23
 ```
+
+### Create an album 
+```
+POST /api/album/add
+Accept: */*
+Content-Type: application/json
+{
+    "artist": "Pink Floyd",
+    "albumName": "Atom Heart Mother",
+    "description": "Atom Heart Mother is the fifth studio album by the English progressive rock band Pink Floyd."
+}
+RESPONSE: HTTP 201 (Created)
+Location header: http://localhost:8080/album/23
+
+
+
+```
