@@ -19,7 +19,7 @@ import java.net.URI;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/vinyl")
+@RequestMapping("/api/album")
 public class AlbumController {
 
     private final AlbumService albumService;
