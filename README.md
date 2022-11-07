@@ -52,7 +52,17 @@ Content-Type: application/json
 }
 RESPONSE: HTTP 201 (Created)
 Location header: http://localhost:8080/album/23
+```
 
-
-
+### Update an artist 
+```
+PATCH /api/artist/update
+Accept: */*
+Content-Type: application/json
+{
+    "id": 14,
+    "name": "The Cure",
+    "description": "some description description"
+}
+RESPONSE: HTTP 200 (artist)
 ```
