@@ -2,11 +2,11 @@
 
 Spring Restful web service End Points <br>
 We will have the following rest web services endpoints.
-Colons can be used to align columns.
 
-| Tables        | Are           | Cool  |
-| ------------- |:-------------:| -----:|
-| col 3 is      | right-aligned | $1600 |
-| col 2 is      | centered      |   $12 |
-| zebra stripes | are neat      |    $1 |
+
+|   | Are           | Cool  |       |
+| - |:-------------:| -----:| -----;|
+| 1 | right-aligned | $1600 |       |
+| 2 | centered      |   $12 |       |
+| 3 | are neat      |    $1 |       |
 			
