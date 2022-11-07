@@ -27,13 +27,12 @@ Accept: */*
 Content-Type: application/json
 {
     "name": "Pink Floyd",
-    "description": "Pink Floyd are an English rock band formed in London in 1965. <br> 
-    Gaining an early following as one of the first British psychedelic groups, they were distinguished by their <br> extended compositions, sonic experimentation, philosophical lyrics and elaborate live shows. They became a leading band of the progressive rock genre, cited by some as the greatest progressive rock band of all time.",
+    "description": "Pink Floyd are an English rock band formed in London in 1965.",
     "albums": [
         {
             "artist": "Pink Floyd",
             "albumName": "The Dark Side of the Moon",
-            "description": "The Dark Side of the Moon is the eighth studio album by the English rock band Pink Floyd, released on 1 March 1973 by Harvest Records. "
+            "description": "The Dark Side of the Moon is the eighth studio album by the English rock band Pink Floyd. "
         }
     ]
 }
