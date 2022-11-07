@@ -19,3 +19,23 @@ We will have the following rest web services endpoints.
 | 11 	| /api/artist/delete{id}          	| DELETE      	| Delete an artist       	|
 | 12 	| /api/vinyl/delete{id}           	| DELETE      	| Delete a vinyl         	|
 			
+### Create an artist 
+
+```
+POST /api/artist/add
+Accept: */*
+Content-Type: application/json
+{
+    "name": "Pink Floyd",
+    "description": "Pink Floyd are an English rock band formed in London in 1965. Gaining an early following as one of the first British psychedelic groups, they were distinguished by their extended compositions, sonic experimentation, philosophical lyrics and elaborate live shows. They became a leading band of the progressive rock genre, cited by some as the greatest progressive rock band of all time.",
+    "albums": [
+        {
+            "artist": "Pink Floyd",
+            "albumName": "The Dark Side of the Moon",
+            "description": "The Dark Side of the Moon is the eighth studio album by the English rock band Pink Floyd, released on 1 March 1973 by Harvest Records. "
+        }
+    ]
+}
+RESPONSE: HTTP 201 (Created)
+Location header: http://localhost:8080/artist/23
+```
