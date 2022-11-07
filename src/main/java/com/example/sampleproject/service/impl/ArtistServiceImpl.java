@@ -14,6 +14,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -44,7 +45,7 @@ public class ArtistServiceImpl implements ArtistService {
     }
 
     @Override
-    public ArtistServiceModel finById(Long id) {
+    public ArtistServiceModel findById(Long id) {
         ArtistServiceModel artistServiceModel = this.artistRepository
                 .findById(id)
                 .map(a -> {
@@ -115,5 +116,12 @@ public class ArtistServiceImpl implements ArtistService {
                     .collect(Collectors.toList()));
         }
         return this.artistRepository.save(artist);
+    }
+
+    @Override
+    public void deleteArtist(Long id) {
+        ArtistEntity artist = this.artistRepository.findById(id)
+                .orElseThrow(() -> new ArtistNotFoundException("Artist Entity with id " + id + " was not found!"));
+        this.artistRepository.deleteById(artist.getId());
     }
 }

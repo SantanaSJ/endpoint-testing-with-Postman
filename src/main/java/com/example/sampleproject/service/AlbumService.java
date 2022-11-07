@@ -23,5 +23,7 @@ public interface AlbumService {
     AlbumEntity addAlbum(AlbumAddBindingModel addBindingModel);
 
     AlbumServiceModel updateAlbum(UpdateAlbumBindingModel bindingModel);
+
+    void deleteArtist(Long id);
 }
 

@@ -6,11 +6,12 @@ import com.example.sampleproject.model.entities.ArtistEntity;
 import com.example.sampleproject.model.service.ArtistServiceModel;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface ArtistService {
     List<ArtistServiceModel> findAllArtists();
 
-    ArtistServiceModel finById(Long id);
+    ArtistServiceModel findById(Long id);
 
     ArtistServiceModel findByName(String name);
 
@@ -19,4 +20,7 @@ public interface ArtistService {
     ArtistEntity addArtist(ArtistAddBindingModel addBindingModel);
 
     ArtistEntity updateArtist(UpdateArtistBindingModel updateArtistBindingModel);
+
+    void deleteArtist(Long id);
+
 }

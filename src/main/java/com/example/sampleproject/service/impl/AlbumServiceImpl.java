@@ -2,7 +2,7 @@ package com.example.sampleproject.service.impl;
 
 import com.example.sampleproject.exception.AlbumNotFoundException;
 import com.example.sampleproject.exception.ArtistNotFoundException;
-import com.example.sampleproject.exception.VinylNotFoundException;
+//import com.example.sampleproject.exception.VinylNotFoundException;
 import com.example.sampleproject.model.binding.AlbumAddBindingModel;
 import com.example.sampleproject.model.binding.UpdateAlbumBindingModel;
 import com.example.sampleproject.model.entities.AlbumEntity;
@@ -59,21 +59,21 @@ public class AlbumServiceImpl implements AlbumService {
 
     @Override
     public AlbumServiceModel finById(Long id) {
-        AlbumServiceModel vinylServiceModel = this.albumRepository.findById(id)
+        AlbumServiceModel albumServiceModel = this.albumRepository.findById(id)
                 .map(v -> {
                     AlbumServiceModel map = this.mapper.map(v, AlbumServiceModel.class);
                     map.setArtist(v.getArtist().getName());
                     return map;
                 })
-                .orElseThrow(() -> new VinylNotFoundException("Vinyl with id" + id + " was not found!"));
-        return vinylServiceModel;
+                .orElseThrow(() -> new AlbumNotFoundException("Vinyl with id" + id + " was not found!"));
+        return albumServiceModel;
     }
 
     @Override
     public AlbumServiceModel findByAlbum(String album) {
         AlbumEntity albumEntity = this.albumRepository
                 .findByAlbumName(album)
-                .orElseThrow(() -> new VinylNotFoundException("Vinyl with name " + album + " was not found!"));
+                .orElseThrow(() -> new AlbumNotFoundException("Album with name " + album + " was not found!"));
 
         AlbumServiceModel serviceModel = this.mapper.map(albumEntity, AlbumServiceModel.class);
         serviceModel.setArtist(albumEntity.getArtist().getName());
@@ -118,6 +118,12 @@ public class AlbumServiceImpl implements AlbumService {
         return albumServiceModel;
     }
 
+    @Override
+    public void deleteArtist(Long id) {
+        AlbumEntity albumEntity = this.albumRepository.findById(id)
+                .orElseThrow(() -> new AlbumNotFoundException("Album Entity with id " + id + " was not found!"));
+        this.artistRepository.deleteById(albumEntity.getId());
+    }
     private List<AlbumServiceModel> getVinylServiceModels(List<AlbumEntity> entities) {
         List<AlbumServiceModel> collect = entities
                 .stream()

@@ -14,6 +14,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/artist")
@@ -33,7 +34,7 @@ public class ArtistController {
 
     @GetMapping("/find/{id}")
     public ResponseEntity<ArtistServiceModel> getArtistById(@PathVariable("id") Long id) {
-        ArtistServiceModel artistServiceModel = this.artistService.finById(id);
+        ArtistServiceModel artistServiceModel = this.artistService.findById(id);
         return ResponseEntity.ok(artistServiceModel);
     }
 
@@ -53,9 +54,10 @@ public class ArtistController {
             return ResponseEntity.badRequest().body(new ResponseMessage("Artist with this name already exists!"));
         }
         ArtistEntity artist = this.artistService.addArtist(addBindingModel);
+//        ??
         URI location = ServletUriComponentsBuilder
-                .fromCurrentRequest()
-                .path("/{id}")
+                .fromCurrentServletMapping()
+                .path("/artist/{id}")
                 .buildAndExpand(artist.getId())
                 .toUri();
         return ResponseEntity.created(location).build();
@@ -63,7 +65,7 @@ public class ArtistController {
 
     @PatchMapping("/update/{id}")
     public ResponseEntity<?> updateArtist(@RequestBody @Valid UpdateArtistBindingModel updateArtistBindingModel,
-                                          BindingResult bindingResult, @PathVariable("id") Long id) {
+                                          BindingResult bindingResult) {
 
         if (bindingResult.hasErrors()) {
             ResponseEntity.badRequest().body(new ResponseMessage("Invalid data!"));
@@ -73,4 +75,16 @@ public class ArtistController {
 
         return ResponseEntity.ok().body(artistUpdate);
     }
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<?> deleteArtist(@PathVariable("id") Long id) {
+
+      this.artistService.deleteArtist(id);
+
+      return ResponseEntity.ok().body(new ResponseMessage("Artist deleted successfully!"));
+
+
+    }
+
+
 }

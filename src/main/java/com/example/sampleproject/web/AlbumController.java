@@ -58,8 +58,8 @@ public class AlbumController {
         }
         AlbumEntity albumEntity = this.albumService.addAlbum(addBindingModel);
         URI location = ServletUriComponentsBuilder
-                .fromCurrentRequest()
-                .path("/{id}")
+                .fromCurrentServletMapping()
+                .path("/vinyl/{id}")
                 .buildAndExpand(albumEntity.getId())
                 .toUri();
         return ResponseEntity.created(location).build();
@@ -76,6 +76,16 @@ public class AlbumController {
         AlbumServiceModel albumServiceModel = this.albumService.updateAlbum(bindingModel);
 
         return ResponseEntity.ok().body(albumServiceModel);
+
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<?> deleteArtist(@PathVariable("id") Long id) {
+
+        this.albumService.deleteArtist(id);
+
+        return ResponseEntity.ok().body(new ResponseMessage("Artist deleted successfully!"));
+
 
     }
 
