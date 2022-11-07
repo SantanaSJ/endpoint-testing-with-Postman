@@ -1,6 +1,6 @@
 # vinyl-store-app
 
-Spring Restful web service End Points
+Spring Restful web service End Points <br>
 We will have the following rest web services endpoints.
 Colons can be used to align columns.
 
