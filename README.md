@@ -66,3 +66,16 @@ Content-Type: application/json
 }
 RESPONSE: HTTP 200 (artist)
 ```
+
+### Update an album 
+```
+PATCH /api/album/update
+Accept: */*
+Content-Type: application/json
+{
+    "id": 1,
+    "albumName": "Stormbringer",
+    "description": "new description"
+}
+RESPONSE: HTTP 200 (album)
+```
