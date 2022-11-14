@@ -24,7 +24,7 @@ public class AlbumController {
 
     private final AlbumService albumService;
 
-    public AlbumController(ModelMapper mapper, AlbumService recordService) {
+    public AlbumController(AlbumService recordService) {
         this.albumService = recordService;
     }
 
@@ -51,7 +51,7 @@ public class AlbumController {
     public ResponseEntity<?> addAlbum(@RequestBody @Valid AlbumAddBindingModel addBindingModel, BindingResult bindingResult) {
 
         if (bindingResult.hasErrors()) {
-            ResponseEntity.badRequest().body(new ResponseMessage("Invalid data!"));
+           return ResponseEntity.badRequest().body(new ResponseMessage("Invalid data!"));
         }
         if (this.albumService.existsByName(addBindingModel.getAlbumName())) {
             return ResponseEntity.badRequest().body(new ResponseMessage("Album with this name already exists!"));
@@ -62,7 +62,7 @@ public class AlbumController {
                 .path("/vinyl/{id}")
                 .buildAndExpand(albumEntity.getId())
                 .toUri();
-        return ResponseEntity.created(location).build();
+        return ResponseEntity.created(location).body(new ResponseMessage("Album added successfully!"));
     }
 
     @PatchMapping("/update/{id}")

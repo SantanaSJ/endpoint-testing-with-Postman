@@ -48,7 +48,7 @@ public class ArtistController {
     public ResponseEntity<?> addArtist(@RequestBody @Valid ArtistAddBindingModel addBindingModel, BindingResult bindingResult) {
 
         if (bindingResult.hasErrors()) {
-             ResponseEntity.badRequest().body(new ResponseMessage("Invalid data!"));
+            return ResponseEntity.badRequest().body(new ResponseMessage("Invalid data!"));
         }
         if (this.artistService.existsByName(addBindingModel.getName())) {
             return ResponseEntity.badRequest().body(new ResponseMessage("Artist with this name already exists!"));
@@ -60,10 +60,10 @@ public class ArtistController {
                 .path("/artist/{id}")
                 .buildAndExpand(artist.getId())
                 .toUri();
-        return ResponseEntity.created(location).build();
+        return ResponseEntity.created(location).body(new ResponseMessage("Artist created successfully!"));
     }
 
-    @PatchMapping("/update/{id}")
+    @PatchMapping("/update")
     public ResponseEntity<?> updateArtist(@RequestBody @Valid UpdateArtistBindingModel updateArtistBindingModel,
                                           BindingResult bindingResult) {
 

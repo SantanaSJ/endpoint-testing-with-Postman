@@ -1,9 +1,14 @@
 package com.example.sampleproject.model.binding;
 
+import javax.validation.constraints.NotBlank;
+
 public class AlbumAddBindingModel {
 
+    @NotBlank
     private String artist;
+    @NotBlank
     private String albumName;
+    @NotBlank
     private String description;
 
     public String getArtist() {
