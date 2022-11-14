@@ -7,17 +7,17 @@ We will have the following rest web services endpoints.
 |    	| URI                             	| HTTP Method 	| Details                	|
 |----	|---------------------------------	|-------------	|------------------------	|
 | 1  	| /api/artist/all                 	| GET         	|  Gets all   artists    	|
-| 2  	| /api/vinyl/all                  	| GET         	| Gets all vinyls        	|
+| 2  	| /api/album/all                  	| GET         	| Gets all albums        	|
 | 3  	| /api/artist/find/{id}           	| GET         	| Find an artist by id   	|
-| 4  	| /api/vinyl/find/{id}            	| GET         	| Find a vinyl by id     	|
+| 4  	| /api/album/find/{id}            	| GET         	| Find an album by id     	|
 | 5  	| /api/artist/find-by-name/{name} 	| GET         	| Find artist by name    	|
-| 6  	| /api/vinyl/find-by-name/{name}  	| GET         	| Find vinyl by name     	|
+| 6  	| /api/album/find-by-name/{name}  	| GET         	| Find album by name     	|
 | 7  	| /api/artist/add                 	| POST        	| Add an artist          	|
-| 8  	| /api/vinyl/add                  	| POST        	| Add a vinyl            	|
+| 8  	| /api/album/add                  	| POST        	| Add an album            	|
 | 9  	| /api/artist/update              	| PATCH       	| Update an artist       	|
-| 10 	| /api/vinyl/update               	| PATCH       	| Update a vinyl         	|
+| 10 	| /api/album/update               	| PATCH       	| Update an album         	|
 | 11 	| /api/artist/delete{id}          	| DELETE      	| Delete an artist       	|
-| 12 	| /api/vinyl/delete{id}           	| DELETE      	| Delete a vinyl         	|
+| 12 	| /api/vinyl/delete{id}           	| DELETE      	| Delete a album         	|
 			
 ### Create an artist 
 
