@@ -27,7 +27,7 @@ GET /api/artist/all
 
 RESPONSE: HTTP 200 (OK)
 ```
-<img src="https://github.com/SantanaSJ/vinyl-store-app/blob/master/all.png" alt="hotels" title="hotels" width="400" height="400">
+<img src="https://github.com/SantanaSJ/vinyl-store-app/blob/master/all.png" alt="hotels" title="hotels">
 
 ### Get all albums
 
