@@ -18,7 +18,10 @@ We will have the following rest web services endpoints.
 | 10 	| /api/album/update               	| PATCH       	| Update an album         	|
 | 11 	| /api/artist/delete{id}          	| DELETE      	| Delete an artist       	|
 | 12 	| /api/vinyl/delete{id}           	| DELETE      	| Delete a album         	|
-			
+
+
+### Basic testing with Postman
+	
 
 ### Get all artists
 
