@@ -85,12 +85,13 @@ PATCH /api/artist/update
 Accept: */*
 Content-Type: application/json
 {
-    "id": 14,
-    "name": "The Cure",
-    "description": "some description description"
+    "id": {{artistId}},
+    "name": "Smashing Pumpkins3",
+    "description": "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo."
 }
 RESPONSE: HTTP 200 (artist)
 ```
+<img src="https://github.com/SantanaSJ/vinyl-store-app/blob/master/artist update.png" alt="postman" title="postman">
 
 ### Update an album 
 ```
