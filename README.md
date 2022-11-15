@@ -1,6 +1,5 @@
-
-Spring Restful web service end points <br>
 ### Basic testing with Postman
+Spring Restful web service end points <br>
 We will have the following rest web services endpoints.
 
 
