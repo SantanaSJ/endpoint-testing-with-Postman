@@ -19,6 +19,15 @@ We will have the following rest web services endpoints.
 | 11 	| /api/artist/delete{id}          	| DELETE      	| Delete an artist       	|
 | 12 	| /api/vinyl/delete{id}           	| DELETE      	| Delete a album         	|
 			
+
+### Get all artists
+
+```
+GET /api/artist/all
+
+RESPONSE: HTTP 200 (OK)
+```
+
 ### Create an artist 
 
 ```
