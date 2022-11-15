@@ -28,6 +28,14 @@ GET /api/artist/all
 RESPONSE: HTTP 200 (OK)
 ```
 
+### Get all albums
+
+```
+GET /api/album/all
+
+RESPONSE: HTTP 200 (OK)
+```
+
 ### Create an artist 
 
 ```
