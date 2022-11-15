@@ -7,6 +7,7 @@ import java.util.List;
 
 public class UpdateArtistBindingModel {
 
+
     private Long id;
     @NotBlank
     private String name;

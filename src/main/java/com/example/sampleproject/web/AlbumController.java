@@ -1,14 +1,11 @@
 package com.example.sampleproject.web;
 
 import com.example.sampleproject.model.binding.AlbumAddBindingModel;
-import com.example.sampleproject.model.binding.ArtistAddBindingModel;
 import com.example.sampleproject.model.binding.UpdateAlbumBindingModel;
 import com.example.sampleproject.model.entities.AlbumEntity;
-import com.example.sampleproject.model.entities.ArtistEntity;
 import com.example.sampleproject.model.response.ResponseMessage;
 import com.example.sampleproject.model.service.AlbumServiceModel;
 import com.example.sampleproject.service.AlbumService;
-import org.modelmapper.ModelMapper;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -65,12 +62,11 @@ public class AlbumController {
         return ResponseEntity.created(location).body(new ResponseMessage("Album added successfully!"));
     }
 
-    @PatchMapping("/update/{id}")
-    public ResponseEntity<?> updateAlbum(@RequestBody UpdateAlbumBindingModel bindingModel, BindingResult br,
-                                         @PathVariable("id") Long id) {
+    @PatchMapping("/update")
+    public ResponseEntity<?> updateAlbum(@RequestBody @Valid UpdateAlbumBindingModel bindingModel, BindingResult br) {
 
         if (br.hasErrors()) {
-            ResponseEntity.badRequest().body(new ResponseMessage("Invalid data!"));
+           return ResponseEntity.badRequest().body(new ResponseMessage("Invalid data!"));
         }
 
         AlbumServiceModel albumServiceModel = this.albumService.updateAlbum(bindingModel);
@@ -80,11 +76,11 @@ public class AlbumController {
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<?> deleteArtist(@PathVariable("id") Long id) {
+    public ResponseEntity<?> deleteAlbum(@PathVariable("id") Long id) {
 
-        this.albumService.deleteArtist(id);
+        this.albumService.deleteAlbum(id);
 
-        return ResponseEntity.ok().body(new ResponseMessage("Artist deleted successfully!"));
+        return ResponseEntity.ok().body(new ResponseMessage("Album deleted successfully!"));
 
 
     }

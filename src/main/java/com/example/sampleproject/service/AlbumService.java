@@ -24,6 +24,6 @@ public interface AlbumService {
 
     AlbumServiceModel updateAlbum(UpdateAlbumBindingModel bindingModel);
 
-    void deleteArtist(Long id);
+    void deleteAlbum(Long id);
 }
 

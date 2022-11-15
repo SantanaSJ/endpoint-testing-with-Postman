@@ -68,7 +68,7 @@ public class ArtistController {
                                           BindingResult bindingResult) {
 
         if (bindingResult.hasErrors()) {
-            ResponseEntity.badRequest().body(new ResponseMessage("Invalid data!"));
+          return ResponseEntity.badRequest().body(new ResponseMessage("Invalid data!"));
         }
 
         ArtistEntity artistUpdate = this.artistService.updateArtist(updateArtistBindingModel);

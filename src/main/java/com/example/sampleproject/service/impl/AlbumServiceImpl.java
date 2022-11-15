@@ -119,10 +119,10 @@ public class AlbumServiceImpl implements AlbumService {
     }
 
     @Override
-    public void deleteArtist(Long id) {
+    public void deleteAlbum(Long id) {
         AlbumEntity albumEntity = this.albumRepository.findById(id)
                 .orElseThrow(() -> new AlbumNotFoundException("Album Entity with id " + id + " was not found!"));
-        this.artistRepository.deleteById(albumEntity.getId());
+        this.albumRepository.deleteById(albumEntity.getId());
     }
     private List<AlbumServiceModel> getVinylServiceModels(List<AlbumEntity> entities) {
         List<AlbumServiceModel> collect = entities
