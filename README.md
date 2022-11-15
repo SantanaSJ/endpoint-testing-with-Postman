@@ -105,4 +105,4 @@ Content-Type: application/json
 }
 RESPONSE: HTTP 200 (album)
 ```
-<img src="https://github.com/SantanaSJ/vinyl-store-app/blob/master/albun update.png" alt="postman" title="postman">
+<img src="https://github.com/SantanaSJ/vinyl-store-app/blob/master/album update.png" alt="postman" title="postman">
