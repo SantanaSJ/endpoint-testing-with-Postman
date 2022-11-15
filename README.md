@@ -1,4 +1,3 @@
-# vinyl-store-app
 
 Spring Restful web service End Points <br>
 ### Basic testing with Postman
