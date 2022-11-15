@@ -26,6 +26,7 @@ We will have the following rest web services endpoints.
 GET /api/artist/all
 
 RESPONSE: HTTP 200 (OK)
+![image](https://user-images.githubusercontent.com/63861416/201934003-44a6bf2d-4009-4cd3-8fae-6a36662eb120.png)
 ```
 
 ### Get all albums
