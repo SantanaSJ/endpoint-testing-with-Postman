@@ -62,6 +62,7 @@ Content-Type: application/json
 RESPONSE: HTTP 201 (Created)
 Location header: http://localhost:8080/artist/23
 ```
+<img src="https://github.com/SantanaSJ/vinyl-store-app/blob/master/add artist.png" alt="postman" title="postman">
 
 ### Create an album 
 ```
