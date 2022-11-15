@@ -99,9 +99,9 @@ PATCH /api/album/update
 Accept: */*
 Content-Type: application/json
 {
-    "id": 1,
-    "albumName": "Stormbringer",
-    "description": "new description"
+    "id": {{albumId}},
+    "albumName": "Stormbringer1",
+    "description": "Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt."
 }
 RESPONSE: HTTP 200 (album)
 ```
