@@ -1,6 +1,7 @@
 # vinyl-store-app
 
 Spring Restful web service End Points <br>
+### Basic testing with Postman
 We will have the following rest web services endpoints.
 
 
@@ -20,8 +21,6 @@ We will have the following rest web services endpoints.
 | 12 	| /api/vinyl/delete{id}           	| DELETE      	| Delete a album         	|
 
 
-### Basic testing with Postman
-	
 
 ### Get all artists
 
